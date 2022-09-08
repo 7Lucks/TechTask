@@ -33,26 +33,28 @@ public enum StorageError: Error {
 
 public class MobileStorageProvider: MobileStorage {
     
-    /// storage - Dictionary will store the 'Mobile' model. It will be handy because it has a unique IMEI code that allows a quick key search.
+    /// storage - Dictionary will store the ‘Mobile’ model. It will be handy because it has a unique IMEI code that allows a quick key search.
     private var storage = [String: Mobile]()
     
     /// Obtaining all previously saved data from the storage dict
-    /// - Returns: Set of our Mobile
+    /// - Returns: Set of our ‘Mobile’
     public func getAll() -> Set<Mobile> {
         Set(self.storage.values)
     }
     
     /// Method that allows you to find a value by its unique imei from the storage (after save method)
     /// - Parameter imei: Unique string imei number.
-    /// - Returns: found 'Mobile' if Imei exist
+    /// - Returns: found ‘Mobile’ if Imei exist
     public func findByImei(_ imei: String) -> Mobile? {
         self.storage[imei]
     }
     
     /// Save all Mobile data we receive
-    /// - Parameter if: here we check for existed data to save from the storage dict.
+    /// - Parameter mobile:‘Mobile’ with unique imei
+    /// - If: here we check for existed data to save from the storage dict.
     /// - Throws: if we are trying to add an already existing imei, this should throw an error attemptToAddNonUniqueElement.
-    /// - Returns: 'Mobile' after saving some data
+    /// - Returns: ‘Mobile’ after saving some data
+    
     public func save(_ mobile: Mobile) throws -> Mobile {
         if self.exists(mobile) {
             //
@@ -62,16 +64,19 @@ public class MobileStorageProvider: MobileStorage {
         return mobile
     }
     
-    /// Deleting a previously saved 'Mobile' from the storage
+    /// Deleting a previously saved ‘Mobile’ from the storage
+    /// - Parameter product: ‘Mobile’ with unique imei
     /// - Throws: we obtain this error if we trying to remove a non-existent element
     public func delete(_ product: Mobile) throws {
         guard self.exists(product) else {
             throw StorageError.attemptToRemoveNonExistElement
         }
-            self.storage[product.imei] = nil
+        self.storage[product.imei] = nil
     }
     
     /// Check if an Imei is already exists in storage
+    /// - Parameter product:‘Mobile’ with unique imei
+    /// - Returns:true if ‘Mobile’ exists otherwise false
     public func exists(_ product: Mobile) -> Bool {
         self.findByImei(product.imei) != nil
     }
