@@ -33,7 +33,7 @@ public enum StorageError: Error {
 
 public class MobileStorageProvider: MobileStorage {
     
-    /// storage -  a dictionary that will store the Mobile model. It will be convenient to use because there is a unique imei code and it is helps with a quick search by the key
+    /// storage - Dictionary will store the 'Mobile' model. It will be handy because it has a unique IMEI code that allows a quick key search.
     private var storage = [String: Mobile]()
     
     /// Obtaining all previously saved data from the storage dict
