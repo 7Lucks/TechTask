@@ -11,6 +11,7 @@
 		6C6713F928CA665E008D97C3 /* TechTask.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C6713EE28CA665E008D97C3 /* TechTask.framework */; };
 		6C6713FE28CA665E008D97C3 /* TechTaskTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C6713FD28CA665E008D97C3 /* TechTaskTests.swift */; };
 		6C6713FF28CA665E008D97C3 /* TechTask.h in Headers */ = {isa = PBXBuildFile; fileRef = 6C6713F128CA665E008D97C3 /* TechTask.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6C67140928CA668E008D97C3 /* StorageProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C67140828CA668E008D97C3 /* StorageProvider.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,6 +30,7 @@
 		6C6713F228CA665E008D97C3 /* TechTask.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = TechTask.docc; sourceTree = "<group>"; };
 		6C6713F828CA665E008D97C3 /* TechTaskTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TechTaskTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C6713FD28CA665E008D97C3 /* TechTaskTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TechTaskTests.swift; sourceTree = "<group>"; };
+		6C67140828CA668E008D97C3 /* StorageProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageProvider.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +74,7 @@
 			isa = PBXGroup;
 			children = (
 				6C6713F128CA665E008D97C3 /* TechTask.h */,
+				6C67140828CA668E008D97C3 /* StorageProvider.swift */,
 				6C6713F228CA665E008D97C3 /* TechTask.docc */,
 			);
 			path = TechTask;
@@ -194,6 +197,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6C67140928CA668E008D97C3 /* StorageProvider.swift in Sources */,
 				6C6713F328CA665E008D97C3 /* TechTask.docc in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -396,6 +400,7 @@
 		6C67140628CA665E008D97C3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = BYS83TMS8Q;
@@ -412,6 +417,7 @@
 		6C67140728CA665E008D97C3 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = BYS83TMS8Q;

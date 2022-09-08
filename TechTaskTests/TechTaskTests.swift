@@ -8,29 +8,36 @@
 import XCTest
 @testable import TechTask
 
-class TechTaskTests: XCTestCase {
-
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+final class StorageProviderTests: XCTestCase {
+    private let sut = MobileStorageProvider()
+    private var anyMobile: Mobile {
+        return .init(imei: "some", model: "some")
     }
-
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+    
+    func testStorageIsEmptyWillRetunsEmpty() throws {
+        XCTAssertTrue(sut.getAll().isEmpty)
     }
-
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        // Any test you write for XCTest can be annotated as throws and async.
-        // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
-        // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
+    
+    func testIfMobileHasAddedReturnMobile() throws {
+        let savedResult = try sut.save(self.anyMobile)
+        XCTAssertEqual(savedResult, self.anyMobile)
+        XCTAssertEqual(sut.getAll(), [self.anyMobile])
     }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
+    
+    func testIfAttemptAddingNonUniqueMobileThrowsErr() {
+        _ = try? sut.save(self.anyMobile)
+        XCTAssertThrowsError(try sut.save(self.anyMobile))
+        XCTAssertEqual(sut.getAll(), [self.anyMobile])
     }
-
+    
+    func testMobileContainsInStorageRemoveMobile() throws {
+        _ = try? sut.save(self.anyMobile)
+        try sut.delete(self.anyMobile)
+        XCTAssertEqual(sut.getAll(), [self.anyMobile])
+    }
+    
+    func testAttemptToRemoveNonExistedMobileThrowsErr() throws {
+        XCTAssertThrowsError(try sut.delete(self.anyMobile))
+    }
+    
 }
