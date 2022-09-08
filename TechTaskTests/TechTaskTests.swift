@@ -9,34 +9,38 @@ import XCTest
 @testable import TechTask
 
 final class StorageProviderTests: XCTestCase {
-    private let sut = MobileStorageProvider()
     private var anyMobile: Mobile {
         return .init(imei: "some", model: "some")
     }
     
     func testStorageIsEmptyWillRetunsEmpty() throws {
+        let sut = MobileStorageProvider()
         XCTAssertTrue(sut.getAll().isEmpty)
     }
     
     func testIfMobileHasAddedReturnMobile() throws {
+        let sut = MobileStorageProvider()
         let savedResult = try sut.save(self.anyMobile)
         XCTAssertEqual(savedResult, self.anyMobile)
         XCTAssertEqual(sut.getAll(), [self.anyMobile])
     }
     
     func testIfAttemptAddingNonUniqueMobileThrowsErr() {
+        let sut = MobileStorageProvider()
         _ = try? sut.save(self.anyMobile)
         XCTAssertThrowsError(try sut.save(self.anyMobile))
         XCTAssertEqual(sut.getAll(), [self.anyMobile])
     }
     
     func testMobileContainsInStorageRemoveMobile() throws {
-        _ = try? sut.save(self.anyMobile)
+        let sut = MobileStorageProvider()
+        _ = try sut.save(self.anyMobile)
         try sut.delete(self.anyMobile)
-        XCTAssertEqual(sut.getAll(), [self.anyMobile])
+        XCTAssertTrue(sut.getAll().isEmpty)
     }
     
     func testAttemptToRemoveNonExistedMobileThrowsErr() throws {
+        let sut = MobileStorageProvider()
         XCTAssertThrowsError(try sut.delete(self.anyMobile))
     }
     

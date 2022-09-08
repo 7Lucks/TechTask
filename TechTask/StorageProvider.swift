@@ -23,7 +23,7 @@ public struct Mobile: Hashable {
     let model: String
 }
 
-/// Enum to throw an Errors
+/// Storage errors
 public enum StorageError: Error {
     ///call this error when we trying to add a non unique element to our storage
     case attemptToAddNonUniqueElement
@@ -43,15 +43,16 @@ public class MobileStorageProvider: MobileStorage {
     }
     
     /// Method that allows you to find a value by its unique imei from the storage (after save method)
-    /// - Parameter imei: Unique string imei number
+    /// - Parameter imei: Unique string imei number.
+    /// - Returns: found 'Mobile' if Imei exist
     public func findByImei(_ imei: String) -> Mobile? {
         self.storage[imei]
     }
     
     /// Save all Mobile data we receive
     /// - Parameter if: here we check for existed data to save from the storage dict.
-    /// - Parameter throws: if we are trying to add an already existing imei, this should throw an error attemptToAddNonUniqueElement.
-    /// - Returns: mobile after saving some data
+    /// - Throws: if we are trying to add an already existing imei, this should throw an error attemptToAddNonUniqueElement.
+    /// - Returns: 'Mobile' after saving some data
     public func save(_ mobile: Mobile) throws -> Mobile {
         if self.exists(mobile) {
             //
@@ -61,15 +62,16 @@ public class MobileStorageProvider: MobileStorage {
         return mobile
     }
     
-    /// Deleting a previously saved date from the storage
-    /// - Parameter throws: we obtain this error if we trying to remove a non-existent element
+    /// Deleting a previously saved 'Mobile' from the storage
+    /// - Throws: we obtain this error if we trying to remove a non-existent element
     public func delete(_ product: Mobile) throws {
         guard self.exists(product) else {
             throw StorageError.attemptToRemoveNonExistElement
         }
+            self.storage[product.imei] = nil
     }
     
-    /// Check if an imei is already exists in storage
+    /// Check if an Imei is already exists in storage
     public func exists(_ product: Mobile) -> Bool {
         self.findByImei(product.imei) != nil
     }
